@@ -1,0 +1,73 @@
+<project name="chartjsgenj" default="compile" basedir=".">
+	<property name="dist.dir" value="${basedir}/dist"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="bin.dir" value="${basedir}/bin"/>
+	<property name="javadoc.dir" value="${basedir}/javadoc"/>
+	<!-- <property name="lib.dir" value="${basedir}/lib"/> -->
+	<property name="jar.name" value="${ant.project.name}-${project.version}.jar"/>
+	<property name="jar.src.name" value="${ant.project.name}-src-${project.version}.jar"/>
+	<property name="jar.doc.name" value="${ant.project.name}-doc-${project.version}.jar"/>
+	<property name="mf.sealed" value="true"/>
+
+	<path id="classpath">
+		<!-- <fileset dir="${lib.dir}"><include name="*.jar"/></fileset> -->
+		<pathelement path="${bin.dir}"/>
+	</path>
+
+	<target name="clean">
+		<delete dir="${bin.dir}" includes="**/*.class" />
+	</target>
+
+	<target name="clean.all">
+		<delete dir="${bin.dir}"/>
+		<delete dir="${javadoc.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${bin.dir}"/>
+		<javac destdir="${bin.dir}" includeantruntime="false">
+			<src path="${src.dir}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="dist" depends="dist.binary,dist.source,dist.doc">
+	</target>
+
+	<target name="dist.binary" depends="compile">
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${jar.name}">
+			<manifest>
+				<attribute name="Sealed" value="${mf.sealed}"/>
+			</manifest>
+			<fileset dir="${bin.dir}"/>
+		</jar>
+	</target>
+
+	<target name="dist.source">
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${jar.src.name}">
+			<manifest>
+				<attribute name="Sealed" value="${mf.sealed}"/>
+			</manifest>
+			<fileset dir="${src.dir}"/>
+		</jar>
+	</target>
+
+	<target name="dist.doc" depends="documentation">
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${jar.doc.name}">
+			<manifest>
+				<attribute name="Sealed" value="${mf.sealed}"/>
+			</manifest>
+			<fileset dir="${javadoc.dir}"/>
+		</jar>
+	</target>
+
+	<target name="documentation">
+		<mkdir dir="${javadoc.dir}"/>
+		<javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
+	</target>
+
+</project>
