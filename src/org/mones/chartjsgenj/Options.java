@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 /**
  * Common options for all charts.
- * 
+ *
  * @author mones
  * @see <a href="http://www.chartjs.org/docs/#getting-started-global-chart-configuration">Chart.js global chart configuration</a>
  */
@@ -14,21 +14,21 @@ public class Options implements JSONable {
 	// Number - Number of animation steps
 	public Integer animationSteps = 60;
 	// String - Animation easing effect
-    // Possible effects are:
-    // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
-    //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
-    //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
-    //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
-    //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
-    //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
-    //  easeOutElastic, easeInCubic]
+	// Possible effects are:
+	// [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+	//  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+	//  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+	//  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+	//  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+	//  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+	//  easeOutElastic, easeInCubic]
 	public String animationEasing = "easeOutQuart";
 	// Boolean - If we should show the scale at all
 	public Boolean showScale = true;
 	// Boolean - If we want to override with a hard coded scale
 	public Boolean scaleOverride = false;
 	// ** Required if scaleOverride is true **
-    // Number - The number of steps in a hard coded scale
+	// Number - The number of steps in a hard coded scale
 	public Integer scaleSteps = 0;
 	// Number - The value jump in the hard coded scale
 	public Integer scaleStepWidth = 0;
@@ -41,7 +41,7 @@ public class Options implements JSONable {
 	// Boolean - Whether to show labels on the scale
 	public Boolean scaleShowLabels = true;
 	// Interpolated JS string - can access value
-	public String scaleLabel = "<%=value%>";
+	public JavaScript scaleLabel = new JavaScript("\"<%=value%>\"");
 	// Boolean - Whether the scale should stick to integers, not floats even
 	// if drawing space is there
 	public Boolean scaleIntegersOnly = true;
@@ -67,9 +67,9 @@ public class Options implements JSONable {
 	// Function - Determines whether to execute the customTooltips function
 	// instead of drawing the built in tooltips (See [Advanced - External
 	// Tooltips](#advanced-usage-custom-tooltips))
-	public String customTooltips = "false";
+	public JavaScript customTooltips = new JavaScript("false");
 	// Array - Array of string names to attach tooltip events
- 	public String tooltipEvents = "[ \"mousemove\", \"touchstart\", \"touchmove\" ]";
+	public JavaScript tooltipEvents = new JavaScript("[ \"mousemove\", \"touchstart\", \"touchmove\" ]");
 	// String - Tooltip background colour
 	public Colour tooltipFillColor = new Colour(0.8f);
 	// String - Tooltip label font declaration for the scale label
@@ -103,14 +103,14 @@ public class Options implements JSONable {
 	// String - Template string for multiple tooltips
 	public String multiTooltipTemplate = "<%= value %>";
 	// Function - Will fire on animation progression.
-	public String onAnimationProgress = "function(){}";
+	public JavaScript onAnimationProgress = new JavaScript("function(){}");
 	// Function - Will fire on animation completion.
-	public String onAnimationComplete = "function(){}";
+	public JavaScript onAnimationComplete = new JavaScript("function(){}");
 
 	public static Options DEFAULT = new Options();
 
 	@Override
-	public void addJSON(StringBuilder sb) {		
+	public void addJSON(StringBuilder sb) {
 		boolean initialized = false;
 		sb.append(JSON.OBJ_BEGIN);
 		initialized = addFieldListJSON(sb, initialized);
