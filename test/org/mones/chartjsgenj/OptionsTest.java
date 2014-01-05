@@ -38,6 +38,12 @@ public class OptionsTest {
 		String jsoptions2 = o.jsOptionsVar("options2");
 		assertEquals("var options2 = { scaleFontSize : 10,"
 				+ " scaleFontColor : \"rgba(0, 0, 0, 1.0)\" };", jsoptions2);
+		o.scaleLabel =
+				new JavaScript("function(i) { return \" \" + i.value; }");
+		String jsoptions3 = o.jsOptionsVar("options3");
+		assertEquals("var options3 = { scaleLabel : function(i) {"
+				+ " return \" \" + i.value; }, scaleFontSize : 10,"
+				+ " scaleFontColor : \"rgba(0, 0, 0, 1.0)\" };", jsoptions3);
 	}
 
 }
