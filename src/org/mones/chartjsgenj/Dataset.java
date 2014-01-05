@@ -16,6 +16,10 @@ public class Dataset implements JSONable {
 	private Colour pointStrokeColor;
 	private Colour pointHighlightFill;
 	private Colour pointHighlightStroke;
+	// Bar
+	private Colour highlightFill;
+	private Colour highlightStroke;
+	// Line, Bar
 	private List<Number> data;
 	private String label;
 	// Others
@@ -83,6 +87,22 @@ public class Dataset implements JSONable {
 
 	public void setPointHighlightStroke(Colour pointHighlightStroke) {
 		this.pointHighlightStroke = pointHighlightStroke;
+	}
+
+	public Colour getHighlightFill() {
+		return highlightFill;
+	}
+
+	public void setHighlightFill(Colour highlightFill) {
+		this.highlightFill = highlightFill;
+	}
+
+	public Colour getHighlightStroke() {
+		return highlightStroke;
+	}
+
+	public void setHighlightStroke(Colour highlightStroke) {
+		this.highlightStroke = highlightStroke;
 	}
 
 	public List<Number> getData() {
@@ -155,6 +175,8 @@ public class Dataset implements JSONable {
 		init = addIfSet(strokeColor, "strokeColor", sb, init);
 		init = addIfSet(pointHighlightFill, "pointHighlightFill", sb, init);
 		init = addIfSet(pointHighlightStroke, "pointHighlightStroke", sb, init);
+		init = addIfSet(highlightFill, "highlightFill", sb, init);
+		init = addIfSet(highlightStroke, "highlightStroke", sb, init);
 		init = addIfSet(label, "label", sb, init);
 		init = addIfSet(title, "title", sb, init);
 		init = addIfSet(data, "data", sb, init);
