@@ -19,6 +19,48 @@ public class Colour implements JSONable, Cloneable {
 
 	private static Map<String, int[]> named;
 
+	private static int[][] HTML = new int[][] {
+		new int[] {   0,   0,   0, }, /*  0 - black */
+		new int[] {   0,   0, 128, }, /*  1 - navy */
+		new int[] {   0,   0, 255, }, /*  2 - blue */
+		new int[] {   0, 128,   0, }, /*  3 - green */
+		new int[] {   0, 128, 128, }, /*  4 - teal */
+		new int[] {   0, 255,   0, }, /*  5 - lime */
+		new int[] {   0, 255, 255, }, /*  6 - aqua/cyan */
+		new int[] { 128,   0,   0, }, /*  7 - maroon */
+		new int[] { 128,   0, 128, }, /*  8 - purple */
+		new int[] { 128, 128,   0, }, /*  9 - olive */
+		new int[] { 128, 128, 128, }, /* 10 - gray/grey */
+		new int[] { 255,   0,   0, }, /* 11 - red */
+		new int[] { 255,   0, 255, }, /* 12 - magenta/fuchsia */
+		new int[] { 255, 255,   0, }, /* 13 - yellow */
+		new int[] { 255, 128,   0, }, /* 14 - orange (!= W3C) */
+		new int[] { 255, 255, 255, }, /* 15 - white */
+	};
+
+	static {
+		named = new HashMap<String, int[]>();
+		named.put("black",	HTML[0]);
+		named.put("navy",	HTML[1]);
+		named.put("blue",	HTML[2]);
+		named.put("green"	HTML[3]);
+		named.put("teal",	HTML[4]);
+		named.put("lime",	HTML[5]);
+		named.put("aqua",	HTML[6]);
+		named.put("cyan",	HTML[6]);
+		named.put("maroon",	HTML[7]);
+		named.put("purple",	HTML[8]);
+		named.put("olive",	HTML[9]);
+		named.put("gray",	HTML[10]);
+		named.put("grey",	HTML[10]);
+		named.put("red",	HTML[11]);
+		named.put("magenta",	HTML[12]);
+		named.put("fuchsia",	HTML[12]);
+		named.put("yellow",	HTML[13]);
+		named.put("orange",	HTML[14]);
+		named.put("white",	HTML[15]);
+	}
+
 	public Colour() {
 		this.r = this.g = this.b = 0;
 		this.a = MAX_ALPHA;
@@ -43,6 +85,13 @@ public class Colour implements JSONable, Cloneable {
 				this.r |= (this.r << 4);
 				this.g |= (this.g << 4);
 				this.b |= (this.b << 4);
+			}
+		} else {
+			int[] rgb = named.get(color.trim().toLowerCase());
+			if (rgb != null) {
+				this.r = rgb[0];
+				this.g = rgb[1];
+				this.b = rgb[2];
 			}
 		}
 	}
