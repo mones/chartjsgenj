@@ -43,7 +43,7 @@ public class Colour implements JSONable, Cloneable {
 		named.put("black",	HTML[0]);
 		named.put("navy",	HTML[1]);
 		named.put("blue",	HTML[2]);
-		named.put("green"	HTML[3]);
+		named.put("green",	HTML[3]);
 		named.put("teal",	HTML[4]);
 		named.put("lime",	HTML[5]);
 		named.put("aqua",	HTML[6]);
