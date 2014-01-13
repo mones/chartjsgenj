@@ -1,6 +1,7 @@
 <project name="chartjsgenj" default="compile" basedir=".">
 	<property name="dist.dir" value="${basedir}/dist"/>
 	<property name="src.dir" value="${basedir}/src"/>
+	<property name="test.dir" value="${basedir}/test"/>
 	<property name="bin.dir" value="${basedir}/bin"/>
 	<property name="javadoc.dir" value="${basedir}/javadoc"/>
 	<!-- <property name="lib.dir" value="${basedir}/lib"/> -->
@@ -18,7 +19,11 @@
 		<delete dir="${bin.dir}" includes="**/*.class" />
 	</target>
 
-	<target name="clean.all">
+	<target name="clean.tests">
+		<delete dir="${test.dir}" includes="**/*.class" />
+	</target>
+
+	<target name="clean.all" depends="clean.tests">
 		<delete dir="${bin.dir}"/>
 		<delete dir="${javadoc.dir}"/>
 		<delete dir="${dist.dir}"/>
@@ -28,6 +33,13 @@
 		<mkdir dir="${bin.dir}"/>
 		<javac destdir="${bin.dir}" includeantruntime="false">
 			<src path="${src.dir}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="compile.tests" depends="compile">
+		<javac destdir="${test.dir}" includeantruntime="true">
+			<src path="${test.dir}"/>
 			<classpath refid="classpath"/>
 		</javac>
 	</target>
@@ -68,6 +80,18 @@
 	<target name="documentation">
 		<mkdir dir="${javadoc.dir}"/>
 		<javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
+	</target>
+
+	<target name="run.tests" depends="compile.tests">
+		<junit printsummary="yes" fork="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement location="${bin.dir}"/>
+				<pathelement location="${test.dir}"/>
+				<pathelement path="${java.class.path}"/>
+			  </classpath>
+			<formatter type="plain" />
+			<test name="org.mones.chartjsgenj.AllTests" />
+		</junit>
 	</target>
 
 </project>
