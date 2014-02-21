@@ -7,7 +7,8 @@ package org.mones.chartjsgenj;
  */
 public enum ChartType {
 	LINE("Line"),
-	BAR("Bar");
+	BAR("Bar"),
+	RADAR("Radar");
 
 	private final String type;
 

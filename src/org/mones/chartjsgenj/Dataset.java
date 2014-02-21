@@ -9,18 +9,19 @@ import java.util.List;
  * @author mones
  */
 public class Dataset implements JSONable {
-	// Line
+	// Line, Radar
 	private Colour fillColor;
 	private Colour strokeColor;
 	private Colour pointColor;
 	private Colour pointStrokeColor;
 	private Colour pointHighlightFill;
 	private Colour pointHighlightStroke;
-	// Bar
+	// Bar, Radar
 	private Colour highlightFill;
 	private Colour highlightStroke;
-	// Line, Bar
+	// Line, Bar, Radar
 	private List<Number> data;
+	// Line, Bar, Radar
 	private String label;
 	// Others
 	private String title; // FIXME
