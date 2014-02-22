@@ -19,9 +19,13 @@ public class Dataset implements JSONable {
 	// Bar, Radar
 	private Colour highlightFill;
 	private Colour highlightStroke;
+	// PolarArea, Pie/Doughnut
+	private Number value;
+	private Colour color;
+	private Colour highlight;
 	// Line, Bar, Radar
 	private List<Number> data;
-	// Line, Bar, Radar
+	// Line, Bar, Radar, PolarArea, Pie/Doughnut
 	private String label;
 	// Others
 	private String title; // FIXME
@@ -40,6 +44,18 @@ public class Dataset implements JSONable {
 	public Dataset(String label, float[] data) {
 		this.label = label;
 		this.setData(data);
+	}
+
+	public Dataset(String label, Number value) {
+		this.label = label;
+		this.value = value;
+	}
+
+	public Dataset(String label, Number value, String color, String highlight) {
+		this.label = label;
+		this.value = value;
+		this.color = new Colour(color);
+		this.highlight = new Colour(highlight);
 	}
 
 	public Colour getFillColor() {
@@ -104,6 +120,30 @@ public class Dataset implements JSONable {
 
 	public void setHighlightStroke(Colour highlightStroke) {
 		this.highlightStroke = highlightStroke;
+	}
+
+	public Number getValue() {
+		return value;
+	}
+
+	public void setValue(Number value) {
+		this.value = value;
+	}
+
+	public Colour getColor() {
+		return color;
+	}
+
+	public void setColor(Colour color) {
+		this.color = color;
+	}
+
+	public Colour getHighlight() {
+		return highlight;
+	}
+
+	public void setHighlight(Colour highlight) {
+		this.highlight = highlight;
 	}
 
 	public List<Number> getData() {
@@ -178,6 +218,9 @@ public class Dataset implements JSONable {
 		init = addIfSet(pointHighlightStroke, "pointHighlightStroke", sb, init);
 		init = addIfSet(highlightFill, "highlightFill", sb, init);
 		init = addIfSet(highlightStroke, "highlightStroke", sb, init);
+		init = addIfSet(value, "value", sb, init);
+		init = addIfSet(color, "color", sb, init);
+		init = addIfSet(highlight, "highlight", sb, init);
 		init = addIfSet(label, "label", sb, init);
 		init = addIfSet(title, "title", sb, init);
 		init = addIfSet(data, "data", sb, init);

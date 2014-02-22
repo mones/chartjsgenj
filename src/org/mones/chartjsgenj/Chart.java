@@ -180,7 +180,14 @@ public class Chart {
 		sb.append(JSON.VAR).append(canvasId).append(CHRT)
 			.append(" = new Chart(").append(canvasId).append(CNTX).append(")")
 			.append('.').append(chartType.chartType())
-			.append('(').append(varName).append(", ").append(varOptions).append(");")
+			.append('(').append(varName);
+		if (chartType == ChartType.POLAR_AREA
+				|| chartType == ChartType.PIE
+				|| chartType == ChartType.DOUGHNUT) {
+			sb.append(".datasets");
+		}
+		sb.append(", ")
+			.append(varOptions).append(");")
 			.append('\n');
 		return sb.toString();
 	}
