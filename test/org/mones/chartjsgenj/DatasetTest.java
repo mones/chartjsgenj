@@ -25,6 +25,13 @@ public class DatasetTest {
 				sb.toString().replaceAll("\\s", "·"));
 //		System.out.println(sb.toString().replaceAll("\\s", "·"));
 
+		ds.setValue(new Integer(7));
+		sb = new StringBuilder();
+		ds.addJSON(sb);
+		Assert.assertEquals("·{··value·:·7,·label·:·\"Label\"··}·",
+				sb.toString().replaceAll("\\s", "·"));
+//		System.out.println(sb.toString().replaceAll("\\s", "·"));
+
 		ds = new Dataset();
 		ds.setData(new int[] { });
 		sb = new StringBuilder();
