@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	ColorTest.class,
 	DatasetTest.class,
 	LineOptionsTest.class,
-	OptionsTest.class
+	OptionsTest.class,
+	ThemeTest.class
 })
 public class AllTests {
 
