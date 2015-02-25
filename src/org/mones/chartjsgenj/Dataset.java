@@ -226,4 +226,18 @@ public class Dataset implements JSONable {
 		init = addIfSet(data, "data", sb, init);
 		sb.append(JSON.OBJ_ENDN);
 	}
+
+	public static List<Dataset> fromLabelsValues(List<String> labels,
+			List<Number> values) {
+		List<Dataset> r = new ArrayList<Dataset>();
+		if (values != null) {
+			final int size = (labels == null)? -1: labels.size();
+			int i = 0;
+			for (Number n: values) {
+				r.add(new Dataset((i >= size)? "": labels.get(i), n));
+				i = (i >= size)? 0: i + 1;
+			}
+		}
+		return r;
+	}
 }
