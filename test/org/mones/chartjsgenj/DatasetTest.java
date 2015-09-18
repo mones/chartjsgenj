@@ -68,4 +68,34 @@ public class DatasetTest {
 				sb.toString().replaceAll("\\s", "·"));
 //		System.out.println(sb.toString().replaceAll("\\s", "·"));
 	}
+
+	@Test
+	public void testFromLabelsValues() {
+		List<Dataset> d0 = Dataset.fromLabelsValues(null, null);
+		Assert.assertNotNull(d0);
+		Assert.assertEquals(0, d0.size());
+		List<Dataset> d1 = Dataset.fromLabelsValues(Arrays
+				.asList(new String [] { "1" }), null);
+		Assert.assertNotNull(d1);
+		Assert.assertEquals(0, d1.size());
+		List<Dataset> d11 = Dataset.fromLabelsValues(Arrays
+				.asList(new String [] { "L1" }), Arrays
+				.asList(new Number [] { 11 }));
+		Assert.assertNotNull(d11);
+		Assert.assertEquals(1, d11.size());
+		Assert.assertNull(d11.get(0).getData());
+		Assert.assertEquals("L1", d11.get(0).getLabel());
+		Assert.assertEquals(11, d11.get(0).getValue());
+		List<Dataset> d2 = Dataset.fromLabelsValues(Arrays
+				.asList(new String [] { "L1", "L2" }), Arrays
+				.asList(new Number [] { 11, 22 }));
+		Assert.assertNotNull(d2);
+		Assert.assertEquals(2, d2.size());
+		for (int i = 0; i < 2; ++i) {
+			Assert.assertNull(d2.get(i).getData());
+			Assert.assertEquals("L" + Integer.toString(i + 1), d2.get(i).getLabel());
+			Assert.assertEquals(11 * (i + 1), d2.get(i).getValue());
+		}
+	}
+
 }
