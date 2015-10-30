@@ -1,0 +1,4 @@
+bin/*
+javadoc/*
+dist/chartjsgenj*.jar
+dist/chartjsgenj*.zip
