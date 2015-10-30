@@ -4,11 +4,18 @@
 	<property name="test.dir" value="${basedir}/test"/>
 	<property name="bin.dir" value="${basedir}/bin"/>
 	<property name="javadoc.dir" value="${basedir}/javadoc"/>
+	<property name="licence.file" value="LICENCE"/>
 	<!-- <property name="lib.dir" value="${basedir}/lib"/> -->
+	<property name="project.version" value="0.9"/>
+	<property name="project.year" value="2013-2015"/>
+	<property name="author.name" value="Ricardo Mones"/>
+	<property name="author.email" value="&lt;ricardo@mones.org&gt;"/>
 	<property name="jar.name" value="${ant.project.name}-${project.version}.jar"/>
 	<property name="jar.src.name" value="${ant.project.name}-src-${project.version}.jar"/>
 	<property name="jar.doc.name" value="${ant.project.name}-doc-${project.version}.jar"/>
 	<property name="mf.sealed" value="true"/>
+	<property name="mf.licence" value="BSD"/>
+	<property name="mf.copyright" value="(c) ${project.year} by ${author.name} ${author.email}"/>
 
 	<path id="classpath">
 		<!-- <fileset dir="${lib.dir}"><include name="*.jar"/></fileset> -->
@@ -28,7 +35,7 @@
 		<delete dir="${javadoc.dir}"/>
 		<delete dir="${dist.dir}"/>
 	</target>
-	
+
 	<target name="compile">
 		<mkdir dir="${bin.dir}"/>
 		<javac destdir="${bin.dir}" includeantruntime="false">
@@ -44,6 +51,13 @@
 		</javac>
 	</target>
 
+	<target name="release.package" depends="dist">
+		<zip destfile="${dist.dir}/${ant.project.name}_${project.version}.zip">
+			<fileset dir="${dist.dir}" includes="${ant.project.name}*${project.version}.jar"/>
+			<fileset dir="${basedir}" includes="${licence.file}"/>
+		</zip>
+	</target>
+
 	<target name="dist" depends="dist.binary,dist.source,dist.doc">
 	</target>
 
@@ -52,7 +66,10 @@
 		<jar destfile="${dist.dir}/${jar.name}">
 			<manifest>
 				<attribute name="Sealed" value="${mf.sealed}"/>
+				<attribute name="Licence" value="${mf.licence}"/>
+				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
+			<metainf  dir="${basedir}"  includes="${licence.file}" />
 			<fileset dir="${bin.dir}"/>
 		</jar>
 	</target>
@@ -62,7 +79,10 @@
 		<jar destfile="${dist.dir}/${jar.src.name}">
 			<manifest>
 				<attribute name="Sealed" value="${mf.sealed}"/>
+				<attribute name="Licence" value="${mf.licence}"/>
+				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
+			<metainf  dir="${basedir}"  includes="${licence.file}" />
 			<fileset dir="${src.dir}"/>
 		</jar>
 	</target>
@@ -72,7 +92,10 @@
 		<jar destfile="${dist.dir}/${jar.doc.name}">
 			<manifest>
 				<attribute name="Sealed" value="${mf.sealed}"/>
+				<attribute name="Licence" value="${mf.licence}"/>
+				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
+			<metainf  dir="${basedir}"  includes="${licence.file}" />
 			<fileset dir="${javadoc.dir}"/>
 		</jar>
 	</target>
