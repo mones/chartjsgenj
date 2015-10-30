@@ -1,0 +1,37 @@
+ChartjsGenj
+-----------
+
+This is a quick implementation of a HTML/JavaScript generator for writting
+web pages with Chart.js charts. My target was to have something I could
+easily generate the charts from Java data, without fighting with strings again
+and again and also without external dependencies. Not everything is supported,
+and the design can surely be improved, but so far it works for me ;-)
+
+Usage
+-----
+
+Distribution zip contains three jar files:
+
+ *  chartjsgenj-x.y.jar (binary)
+ *  chartjsgenj-doc-x.y.jar (javadoc)
+ *  chartjsgenj-src-x.y.jar (sources
+
+To use the library just add the binary to your project's classpath.
+You can use the doc jar to enable autocompletion info in your IDE and
+the src jar to access the sources.
+
+Contribute
+----------
+
+If you have found some bug and want to send a fix just open an issue
+on Github project and submit a pull request:
+
+http://github.com/mones/chartjsgenj
+
+Alternatively you can send a mail to me with the patch.
+
+
+Licence and Copyright
+---------------------
+
+See included LICENCE for legal details.

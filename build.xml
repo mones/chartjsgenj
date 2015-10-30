@@ -5,6 +5,7 @@
 	<property name="bin.dir" value="${basedir}/bin"/>
 	<property name="javadoc.dir" value="${basedir}/javadoc"/>
 	<property name="licence.file" value="LICENCE"/>
+	<property name="readme.file" value="README"/>
 	<!-- <property name="lib.dir" value="${basedir}/lib"/> -->
 	<property name="project.version" value="0.9"/>
 	<property name="project.year" value="2013-2015"/>
@@ -54,6 +55,7 @@
 	<target name="release.package" depends="dist">
 		<zip destfile="${dist.dir}/${ant.project.name}_${project.version}.zip">
 			<fileset dir="${dist.dir}" includes="${ant.project.name}*${project.version}.jar"/>
+			<fileset dir="${basedir}" includes="${readme.file}"/>
 			<fileset dir="${basedir}" includes="${licence.file}"/>
 		</zip>
 	</target>
@@ -70,6 +72,7 @@
 				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
 			<metainf  dir="${basedir}"  includes="${licence.file}" />
+			<metainf  dir="${basedir}"  includes="${readme.file}" />
 			<fileset dir="${bin.dir}"/>
 		</jar>
 	</target>
@@ -83,6 +86,7 @@
 				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
 			<metainf  dir="${basedir}"  includes="${licence.file}" />
+			<metainf  dir="${basedir}"  includes="${readme.file}" />
 			<fileset dir="${src.dir}"/>
 		</jar>
 	</target>
@@ -96,6 +100,7 @@
 				<attribute name="Copyright" value="${mf.copyright}"/>
 			</manifest>
 			<metainf  dir="${basedir}"  includes="${licence.file}" />
+			<metainf  dir="${basedir}"  includes="${readme.file}" />
 			<fileset dir="${javadoc.dir}"/>
 		</jar>
 	</target>
